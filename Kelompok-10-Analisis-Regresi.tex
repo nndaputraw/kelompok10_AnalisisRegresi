@@ -1,0 +1,520 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Kelompok 10 Analisis Regresi},
+  pdfauthor={Kelompok 10},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Kelompok 10 Analisis Regresi}
+\author{Kelompok 10}
+\date{2024-02-11}
+
+\begin{document}
+\maketitle
+
+install\_tinytex()
+
+Anggota kelompok 9:\\
+Ananda Putra Wijaya(G1401221111) Shalma Kaisya Candradewi(G1401221105)
+Vito Raditya Pratama(G1401221112)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(rmarkdown)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'rmarkdown' was built under R version 4.3.2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(readxl)}
+\end{Highlighting}
+\end{Shaded}
+
+\#Membaca data mentah
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"C:/Users/nndap/Downloads/best{-}countries{-}to{-}live{-}in{-}2024.csv"}\NormalTok{)}
+\FunctionTok{head}\NormalTok{(data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   population_2024 population_growthRate land_area       country        region
+## 1      1441719852               0.00916   3287590         India          Asia
+## 2      1425178782              -0.00035   9706961         China          Asia
+## 3       341814420               0.00535   9372610 United States North America
+## 4       279798049               0.00816   1904569     Indonesia          Asia
+## 5       245209815               0.01964    881912      Pakistan          Asia
+## 6       229152217               0.02389    923768       Nigeria        Africa
+##   unMember population_density population_densityMi
+## 1     TRUE           484.9067            1255.9084
+## 2     TRUE           151.2174             391.6530
+## 3     TRUE            37.3673              96.7813
+## 4     TRUE           149.0254             385.9758
+## 5     TRUE           318.0908             823.8551
+## 6     TRUE           251.6027             651.6511
+##                                                               share_borders
+## 1                                    AFG, BGD, BTN, MMR, CHN, NPL, PAK, LKA
+## 2 AFG, BTN, MMR, HKG, IND, KAZ, PRK, KGZ, LAO, MAC, MNG, PAK, RUS, TJK, VNM
+## 3                                                                  CAN, MEX
+## 4                                                             TLS, MYS, PNG
+## 5                                                        AFG, CHN, IND, IRN
+## 6                                                        BEN, CMR, TCD, NER
+##   Hdi2021 Hdi2020 WorldHappiness2022
+## 1   0.633   0.642              3.777
+## 2   0.768   0.764              5.585
+## 3   0.921   0.920              6.977
+## 4   0.705   0.709              5.240
+## 5   0.544   0.543              4.516
+## 6   0.535   0.535              4.552
+\end{verbatim}
+
+\#Mendefinisikan Variabel
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Y}\OtherTok{\textless{}{-}}\NormalTok{data}\SpecialCharTok{$}\NormalTok{Hdi2021}
+\NormalTok{X}\OtherTok{\textless{}{-}}\NormalTok{data}\SpecialCharTok{$}\NormalTok{population\_growthRate}
+\end{Highlighting}
+\end{Shaded}
+
+\#Mengubah nama variabel
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data}\OtherTok{\textless{}{-}}\FunctionTok{data.frame}\NormalTok{(}\FunctionTok{cbind}\NormalTok{(Y,X))}
+\FunctionTok{head}\NormalTok{(data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       Y        X
+## 1 0.633  0.00916
+## 2 0.768 -0.00035
+## 3 0.921  0.00535
+## 4 0.705  0.00816
+## 5 0.544  0.01964
+## 6 0.535  0.02389
+\end{verbatim}
+
+\#Menghitung jumlah baris dan kolom
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n\_baris}\OtherTok{\textless{}{-}}\FunctionTok{nrow}\NormalTok{(data)}
+\NormalTok{n\_kolom}\OtherTok{\textless{}{-}}\FunctionTok{ncol}\NormalTok{(data)}
+\FunctionTok{nrow}\NormalTok{(data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 141
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ncol}\NormalTok{(data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2
+\end{verbatim}
+
+Data yang diambil untuk digunakan berasal dari situs Kaggle. Data yang
+digunakan merupakan data tentang negara yang enak untuk ditinggali.
+Kriteria cocok dilihat berdasarkan nilai Indeks Pembangunan
+Manusia(IPM). IPM yang digunakan pada data ini merupakan IPM tahun 2021.
+
+Variabel Y merupakan skor IPM, sedangkan variabel X merupakan angka laju
+pertumbuhan penduduk. Kami ingin menganalisis, apakah semakin tinggi
+angka laju pertumbuhan penduduk, semakin tinggi pula nilai IPM sebuah
+negara.
+
+Nilai IPM berada dalam rentang 0 sampai dengan 1, dengan semakin tinggi
+nilai IPM sebuah negara, semakin enak negara tersebut untuk ditinggali.
+\#Statistik variabel Y
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(Y)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##  0.3940  0.6070  0.7540  0.7372  0.8750  0.9620
+\end{verbatim}
+
+\#Statistik variabel X
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(X)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
+## -0.030870  0.001180  0.008920  0.009327  0.018230  0.038090
+\end{verbatim}
+
+\#Scatter plot antara angka laju pertumbuhan penduduk(X) dengan IPM(Y)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(X,Y)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Kelompok-10-Analisis-Regresi_files/figure-latex/unnamed-chunk-8-1.pdf}
+Berdasarkan Scatter plot, dapat dilihat bahwa hubungan antara X dan Y
+merupakan hubungan linear negatif, dimana semakin besar nilai variabel
+X, semakin kecil nilai variabel Y
+
+\#Analisis data dengan fungsi LM
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model}\OtherTok{\textless{}{-}}\FunctionTok{lm}\NormalTok{(Y}\SpecialCharTok{\textasciitilde{}}\NormalTok{X,data}\OtherTok{\textless{}{-}}\NormalTok{data)}
+\FunctionTok{summary}\NormalTok{(model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = Y ~ X, data = data <- data)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.33771 -0.07793 -0.01243  0.07637  0.24132 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  0.82002    0.01175   69.79   <2e-16 ***
+## X           -8.88008    0.77032  -11.53   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.1104 on 139 degrees of freedom
+## Multiple R-squared:  0.4888, Adjusted R-squared:  0.4851 
+## F-statistic: 132.9 on 1 and 139 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+Berdasarkan hasil fungsi LM, diperoleh dugaan persamaan regresi adalah
+sebagai berikut \[\hat{y}=0.82002-8.88008{x}\] \#Interpretasi Nilai b0
+adalah -8.88008 dan nilai b1 adalah 0.82002. Artinya jika nilai angka
+laju pertumbuhan penduduk meningkat 1 satuan, maka dugaan nilai IPM akan
+menurun sebesar 8.88008 dan saat angka laju pertumbuhan penduduk
+bernilai 0, maka nilai IPM akan bernilai 0.82002. Perlu diingat bahwa
+nilai IPM berada pada rentang 0 sampai dengan 1.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(anova.model}\OtherTok{\textless{}{-}}\FunctionTok{anova}\NormalTok{(model))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Analysis of Variance Table
+## 
+## Response: Y
+##            Df Sum Sq Mean Sq F value    Pr(>F)    
+## X           1 1.6195 1.61951  132.89 < 2.2e-16 ***
+## Residuals 139 1.6940 0.01219                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\#Ukuran kebaikan model
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(Koef\_det}\OtherTok{\textless{}{-}}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{(anova.model}\SpecialCharTok{$}\StringTok{\textasciigrave{}}\AttributeTok{Sum Sq}\StringTok{\textasciigrave{}}\NormalTok{[}\DecValTok{2}\NormalTok{]}\SpecialCharTok{/}\FunctionTok{sum}\NormalTok{(anova.model}\SpecialCharTok{$}\StringTok{\textasciigrave{}}\AttributeTok{Sum Sq}\StringTok{\textasciigrave{}}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.4887613
+\end{verbatim}
+
+Koefisien determinasi menunjukkan angka sebesar 0.4887613 atau 48.876\%.
+Artinya variasi nilai IPM dapat dijelaskan oleh variasi angka laju
+pertumbuhan penduduk sebesar 48.876\%. Sisa 51.124\% variasi nilai IPM
+dijelaskan oleh faktor atau variabel lain di luar model.
+
+\#Keragaman dugaan parameter
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{qt}\NormalTok{(}\FloatTok{0.025}\NormalTok{,}\AttributeTok{df=}\NormalTok{n\_baris}\DecValTok{{-}2}\NormalTok{,}\AttributeTok{lower.tail=}\ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1.977178
+\end{verbatim}
+
+\#Dugaan parameter \(\beta_0\)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(b0}\OtherTok{\textless{}{-}}\NormalTok{model}\SpecialCharTok{$}\NormalTok{coefficients[[}\DecValTok{1}\NormalTok{]])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.8200195
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(se\_b0}\OtherTok{\textless{}{-}}\FunctionTok{sqrt}\NormalTok{(anova.model}\SpecialCharTok{$}\StringTok{\textasciigrave{}}\AttributeTok{Mean Sq}\StringTok{\textasciigrave{}}\NormalTok{[}\DecValTok{2}\NormalTok{]}\SpecialCharTok{*}\NormalTok{(}\DecValTok{1}\SpecialCharTok{/}\NormalTok{n\_baris}\SpecialCharTok{+}\FunctionTok{mean}\NormalTok{(X)}\SpecialCharTok{\^{}}\DecValTok{2}\SpecialCharTok{/}\FunctionTok{sum}\NormalTok{((X}\SpecialCharTok{{-}}\FunctionTok{mean}\NormalTok{(X))}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{))))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.01174944
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(t\_b0 }\OtherTok{\textless{}{-}}\NormalTok{ b0}\SpecialCharTok{/}\NormalTok{se\_b0)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 69.79221
+\end{verbatim}
+
+\#Hipotesis Uji \(\beta_0\) \(H_0:\beta_0=0\) (semua nilai IPM dapat
+dijelaskan oleh angka laju pertumbuhan penduduk)\\
+\(H_1:\beta_0≠0\) (ada nilai IPM yang tidak dapat dijelaskan oleh angka
+laju pertumbuhan penduduk)
+
+Karena t hitung(69.79) lebih besar daripada t tabel(1.977), kesimpulan
+yang dapat diambil adalah tolak \(H_0\). Ada cukup bukti untuk
+menyatakan bahwa ada nilai IPM yang tidak dapat dijelaskan oleh angka
+laju pertumbuhan penduduk.
+
+\#Dugaan Parameter \(\beta_1\)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(b1}\OtherTok{\textless{}{-}}\NormalTok{model}\SpecialCharTok{$}\NormalTok{coefficients[[}\DecValTok{2}\NormalTok{]])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -8.880076
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(se\_b1}\OtherTok{\textless{}{-}}\FunctionTok{sqrt}\NormalTok{(anova.model}\SpecialCharTok{$}\StringTok{\textasciigrave{}}\AttributeTok{Mean Sq}\StringTok{\textasciigrave{}}\NormalTok{[}\DecValTok{2}\NormalTok{]}\SpecialCharTok{/}\FunctionTok{sum}\NormalTok{((X}\SpecialCharTok{{-}}\FunctionTok{mean}\NormalTok{(X))}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.7703227
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{abs}\NormalTok{((t\_b1}\OtherTok{\textless{}{-}}\NormalTok{b1}\SpecialCharTok{/}\NormalTok{se\_b1))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 11.52774
+\end{verbatim}
+
+\#Hipotesis Uji \(\beta_1\) \(H_0:\beta_1=0\) (tidak ada hubungan linear
+antara angka laju pertumbuhan penduduk dengan nilai IPM)
+\(H_1:\beta_1≠0\) (ada hubungan linear antara angka laju pertumbuhan
+penduduk dengan nilai IPM)
+
+Karena t hitung(11.52) lebih besar daripada t tabel(1.977), kesimpulan
+yang dapat diambil adalah tolak \(H_0\). Ada cukup bukti untuk
+menyatakan bahwa ada hubungan linear antara angka laju pertumbuhan
+penduduk dengan nilai IPM.
+
+\#Selang kepercayaan parameter \(\beta_0\)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(sk.b0}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(b0}\SpecialCharTok{{-}}\FunctionTok{abs}\NormalTok{(}\FunctionTok{qt}\NormalTok{(}\FloatTok{0.025}\NormalTok{, }\AttributeTok{df=}\NormalTok{n\_baris}\DecValTok{{-}2}\NormalTok{))}\SpecialCharTok{*}\NormalTok{se\_b0, b0 }\SpecialCharTok{+} \FunctionTok{abs}\NormalTok{(}\FunctionTok{qt}\NormalTok{(}\FloatTok{0.025}\NormalTok{, }\AttributeTok{df=}\NormalTok{n\_baris}\DecValTok{{-}2}\NormalTok{))}\SpecialCharTok{*}\NormalTok{se\_b0))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.7967887 0.8432502
+\end{verbatim}
+
+Pada taraf nyata 5\%, diyakini bahwa dugaan parameter \(\beta_0\) berada
+dalam selang 0.7765219 sampai 0.8635170
+
+\#Selang kepercayaan \(\beta_1\)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(sk.b1}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(b1}\SpecialCharTok{{-}}\FunctionTok{abs}\NormalTok{(}\FunctionTok{qt}\NormalTok{(}\FloatTok{0.025}\NormalTok{, }\AttributeTok{df=}\NormalTok{n\_baris}\DecValTok{{-}2}\NormalTok{))}\SpecialCharTok{*}\NormalTok{se\_b1, b1 }\SpecialCharTok{+} \FunctionTok{abs}\NormalTok{(}\FunctionTok{qt}\NormalTok{(}\FloatTok{0.025}\NormalTok{, }\AttributeTok{df=}\NormalTok{n\_baris}\DecValTok{{-}2}\NormalTok{))}\SpecialCharTok{*}\NormalTok{se\_b1))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -10.403141  -7.357011
+\end{verbatim}
+
+Pada taraf nyata 5\%, diyakini bahwa dugaan parameter \(\beta_1\) berada
+dalam selang -8.924083 sampai -8.836069
+
+\#Selang kepercayaan rataan nilai harapan amatan
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dugaan\_amatan }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{X=}\FloatTok{0.00675}\NormalTok{)}
+\FunctionTok{predict}\NormalTok{(model, dugaan\_amatan, }\AttributeTok{interval =} \StringTok{"confidence"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         fit       lwr       upr
+## 1 0.7600789 0.7412831 0.7788748
+\end{verbatim}
+
+Sebagai contoh, jika ingin menduga rataan nilai harapan amatan saat
+angka laju pertumbuhan penduduk di suatu negara adalah 0.00675,
+diperoleh rataan nilai IPM sebesar 0.76 dan dengan taraf kepercayaan
+95\%, diyakini bahwa dugaan rataan nilai IPM saat angka laju pertumbuhan
+penduduk adalah 0.00675 berada dalam selang 0.7412831 sampai dengan
+0.7788748.
+
+\#Selang kepercayaan individu amatan
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{predict}\NormalTok{(model, dugaan\_amatan, }\AttributeTok{interval =} \StringTok{"prediction"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         fit       lwr       upr
+## 1 0.7600789 0.5410013 0.9791566
+\end{verbatim}
+
+Sebagai contoh, jika ingin menduga nilai individu amatan saat angka laju
+pertumbuhan penduduk di suatu negara adalah 0.00675, maka diperoleh
+dugaan nilai IPM sebesar 0.76 dan dengan taraf kepercayaan 95\%,
+diyakini bahwa nilai amatan individu nilai IPM saat angka laju
+pertumbuhan penduduk adalah 0.00675 berada dalam selang 0.5410013 sampai
+dengan 0.9791566
+
+\end{document}
