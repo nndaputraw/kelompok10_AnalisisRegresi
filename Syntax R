@@ -1,0 +1,137 @@
+
+Anggota kelompok 9:  
+Ananda Putra Wijaya(G1401221111)
+Shalma Kaisya Candradewi(G1401221105)
+Vito Raditya Pratama(G1401221112)
+
+```{r}
+library(rmarkdown)
+library(readxl)
+```
+
+#Membaca data mentah
+```{r}
+data <- read.csv("C:/Users/nndap/Downloads/best-countries-to-live-in-2024.csv")
+head(data)
+```
+
+#Mendefinisikan Variabel
+```{r}
+Y<-data$Hdi2021
+X<-data$population_growthRate
+```
+
+#Mengubah nama variabel
+```{r}
+data<-data.frame(cbind(Y,X))
+head(data)
+```
+
+#Menghitung jumlah baris dan kolom
+```{r}
+n_baris<-nrow(data)
+n_kolom<-ncol(data)
+nrow(data)
+ncol(data)
+```
+
+Data yang diambil untuk digunakan berasal dari situs Kaggle. Data yang digunakan merupakan data tentang negara yang enak untuk ditinggali. Kriteria cocok dilihat berdasarkan nilai Indeks Pembangunan Manusia(IPM). IPM yang digunakan pada data ini merupakan IPM tahun 2021.
+
+Variabel Y merupakan skor IPM, sedangkan variabel X merupakan angka laju pertumbuhan penduduk.
+Kami ingin menganalisis, apakah semakin tinggi angka laju pertumbuhan penduduk, semakin tinggi pula nilai IPM sebuah negara.
+
+Nilai IPM berada dalam rentang 0 sampai dengan 1, dengan semakin tinggi nilai IPM sebuah negara, semakin enak negara tersebut untuk ditinggali.
+#Statistik variabel Y
+```{r}
+summary(Y)
+```
+#Statistik variabel X
+```{r}
+summary(X)
+```
+#Scatter plot antara angka laju pertumbuhan penduduk(X) dengan IPM(Y)
+```{r}
+plot(X,Y)
+```
+Berdasarkan Scatter plot, dapat dilihat bahwa hubungan antara X dan Y merupakan hubungan linear negatif, dimana semakin besar nilai variabel X, semakin kecil nilai variabel Y
+
+#Analisis data dengan fungsi LM
+```{r}
+model<-lm(Y~X,data<-data)
+summary(model)
+```
+Berdasarkan hasil fungsi LM, diperoleh dugaan persamaan regresi adalah sebagai berikut
+$$\hat{y}=0.82002-8.88008{x}$$
+#Interpretasi
+Nilai b0 adalah -8.88008 dan nilai b1 adalah 0.82002.
+Artinya jika nilai angka laju pertumbuhan penduduk meningkat 1 satuan, maka dugaan nilai IPM akan menurun sebesar 8.88008 dan saat angka laju pertumbuhan penduduk bernilai 0, maka nilai IPM akan bernilai 0.82002. 
+Perlu diingat bahwa nilai IPM berada pada rentang 0 sampai dengan 1.
+```{r}
+(anova.model<-anova(model))
+```
+#Ukuran kebaikan model
+```{r}
+(Koef_det<-1-(anova.model$`Sum Sq`[2]/sum(anova.model$`Sum Sq`)))
+```
+Koefisien determinasi menunjukkan angka sebesar 0.4887613 atau 48.876%. Artinya variasi nilai IPM dapat dijelaskan oleh variasi angka laju pertumbuhan penduduk sebesar 48.876%. Sisa 51.124% variasi nilai IPM dijelaskan oleh faktor atau variabel lain di luar model. 
+
+#Keragaman dugaan parameter
+```{r}
+qt(0.025,df=n_baris-2,lower.tail=FALSE)
+```
+#Dugaan parameter $\beta_0$
+```{r}
+(b0<-model$coefficients[[1]])
+```
+```{r}
+(se_b0<-sqrt(anova.model$`Mean Sq`[2]*(1/n_baris+mean(X)^2/sum((X-mean(X))^2))))
+```
+```{r}
+(t_b0 <- b0/se_b0)
+```
+#Hipotesis Uji $\beta_0$
+$H_0:\beta_0=0$ (semua nilai IPM dapat dijelaskan oleh angka laju pertumbuhan penduduk)  
+$H_1:\beta_0≠0$ (ada nilai IPM yang tidak dapat dijelaskan oleh angka laju pertumbuhan penduduk)
+
+Karena t hitung(69.79) lebih besar daripada t tabel(1.977), kesimpulan yang dapat diambil adalah tolak $H_0$. Ada cukup bukti untuk menyatakan bahwa ada nilai IPM yang tidak dapat dijelaskan oleh angka laju pertumbuhan penduduk.
+
+#Dugaan Parameter $\beta_1$
+```{r}
+(b1<-model$coefficients[[2]])
+```
+```{r}
+(se_b1<-sqrt(anova.model$`Mean Sq`[2]/sum((X-mean(X))^2)))
+```
+```{r}
+abs((t_b1<-b1/se_b1))
+```
+#Hipotesis Uji $\beta_1$
+$H_0:\beta_1=0$ (tidak ada hubungan linear antara angka laju pertumbuhan penduduk dengan nilai IPM)
+$H_1:\beta_1≠0$ (ada hubungan linear antara angka laju pertumbuhan penduduk dengan nilai IPM)
+
+Karena t hitung(11.52) lebih besar daripada t tabel(1.977), kesimpulan yang dapat diambil adalah tolak $H_0$. Ada cukup bukti untuk menyatakan bahwa ada hubungan linear antara angka laju pertumbuhan penduduk dengan nilai IPM.
+
+#Selang kepercayaan parameter $\beta_0$
+```{r}
+(sk.b0<-c(b0-abs(qt(0.025, df=n_baris-2))*se_b0, b0 + abs(qt(0.025, df=n_baris-2))*se_b0))
+```
+Pada taraf nyata 5%, diyakini bahwa dugaan parameter $\beta_0$ berada dalam selang 0.7765219 sampai 0.8635170
+
+#Selang kepercayaan $\beta_1$
+```{r}
+(sk.b1<-c(b1-abs(qt(0.025, df=n_baris-2))*se_b1, b1 + abs(qt(0.025, df=n_baris-2))*se_b1))
+```
+Pada taraf nyata 5%, diyakini bahwa dugaan parameter $\beta_1$ berada dalam selang -8.924083 sampai -8.836069
+
+#Selang kepercayaan rataan nilai harapan amatan
+```{r}
+dugaan_amatan <- data.frame(X=0.00675)
+predict(model, dugaan_amatan, interval = "confidence")
+```
+Sebagai contoh, jika ingin menduga rataan nilai harapan amatan saat angka laju pertumbuhan penduduk di suatu negara adalah 0.00675, diperoleh rataan nilai IPM sebesar 0.76 dan dengan taraf kepercayaan 95%, diyakini bahwa dugaan rataan nilai IPM saat angka laju pertumbuhan penduduk adalah 0.00675 berada dalam selang 0.7412831 sampai dengan 0.7788748.
+
+#Selang kepercayaan individu amatan
+```{r}
+predict(model, dugaan_amatan, interval = "prediction")
+```
+Sebagai contoh, jika ingin menduga nilai individu amatan saat angka laju pertumbuhan penduduk di suatu negara adalah 0.00675, maka diperoleh dugaan nilai IPM sebesar 0.76 dan dengan taraf kepercayaan 95%, diyakini bahwa nilai amatan individu nilai IPM saat angka laju pertumbuhan penduduk adalah 0.00675 berada dalam selang 0.5410013 sampai dengan 0.9791566
